@@ -1,0 +1,51 @@
+.about-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    max-width: 900px;
+    margin: 20px auto;
+  }
+  
+  h1 {
+    font-size: 2em;
+    color: #333;
+    text-align: center;
+  }
+  
+  section {
+    margin-top: 20px;
+  }
+  
+  h2 {
+    font-size: 1.5em;
+    color: #007bff;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  ul li {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+  }
+  
+  ul li strong {
+    font-weight: bold;
+  }
+  
+  .about-container .contact p {
+    font-size: 1.1em;
+  }
+  
+  .about-container .contact p a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .about-container .contact p a:hover {
+    text-decoration: underline;
+  }
+  

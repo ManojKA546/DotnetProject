@@ -1,0 +1,44 @@
+<h1>Products</h1>
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Sales Price</th>
+      <th>MRP</th>
+      <th>Category ID</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.productId }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.salesPrice }}</td>
+      <td>{{ product.mrp }}</td>
+      <td>{{ product.categoryId }}</td>
+      <td>
+        <button (click)="deleteProduct(product.productId)">Delete</button>
+        <button (click)="editProduct(product)">Edit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h2>{{ editMode ? 'Update Product' : 'Add Product' }}</h2>
+<form (ngSubmit)="editMode ? updateProduct() : addProduct()">
+  <label for="name">Name:</label>
+  <input type="text" [(ngModel)]="newProduct.name" name="name" required />
+  
+  <label for="salesPrice">Sales Price:</label>
+  <input type="number" [(ngModel)]="newProduct.salesPrice" name="salesPrice" required />
+  
+  <label for="mrp">MRP:</label>
+  <input type="number" [(ngModel)]="newProduct.mrp" name="mrp" required />
+  
+  <label for="categoryId">Category ID:</label>
+  <input type="number" [(ngModel)]="newProduct.categoryId" name="categoryId" required />
+  
+  <button type="submit">{{ editMode ? 'Update' : 'Add' }}</button>
+</form>

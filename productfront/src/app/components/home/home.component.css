@@ -1,0 +1,66 @@
+.home-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 40px;
+  }
+  
+  section {
+    margin-bottom: 30px;
+  }
+  
+  h2 {
+    color: #007bff;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .products, .categories {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .contact {
+    background-color: #e9f7ff;
+    border: 1px solid #b3d7f7;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .contact p {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .contact p:first-child {
+    font-weight: bold;
+  }
+  
+  @media (max-width: 768px) {
+    .home-container {
+      padding: 10px;
+    }
+  
+    h2 {
+      font-size: 20px;
+    }
+  
+    p {
+      font-size: 14px;
+    }
+  }
+  

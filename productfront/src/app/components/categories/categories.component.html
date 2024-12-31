@@ -1,0 +1,28 @@
+<h1>Categories</h1>
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of categories">
+      <td>{{ category.categoryId }}</td>
+      <td>{{ category.name }}</td>
+      <td>
+        <button (click)="editCategory(category)">Edit</button>
+        <button (click)="deleteCategory(category.categoryId)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>{{ editMode ? 'Update Category' : 'Add Category' }}</h2>
+<form (ngSubmit)="editMode ? updateCategory(newCategory) : addCategory()">
+  <label for="name">Name:</label>
+  <input type="text" [(ngModel)]="newCategory.name" name="name" required />
+  
+  <button type="submit">{{ editMode ? 'Update' : 'Add' }}</button>
+</form>

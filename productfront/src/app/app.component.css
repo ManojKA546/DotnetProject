@@ -1,0 +1,13 @@
+nav {
+    background-color: #3f51b5;
+    padding: 10px;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
