@@ -1,82 +1,81 @@
-using Microsoft.AspNetCore.Mvc; 
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Data; // Required for IDbConnection
 
 [ApiController]
-[Route("[controller]")]
-public class CategoryControl : ControllerBase
+[Route("api/[controller]")]
+public class CategoryController : ControllerBase
 {
     private readonly CategoryDB _categorydb;
 
-    // Constructor should match the class name
-    public CategoryControl(CategoryDB categorydb)
+    public CategoryController(CategoryDB categorydb)
     {
-        _categorydb = categorydb; // Correctly assign the parameter to the field
+        _categorydb = categorydb;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>>  GetAllCategoryAsync()
+    // Get all categories
+    [HttpGet("all")]
+    public async Task<ActionResult<IEnumerable<Category>>> GetAllCategoriesAsync()
     {
-        var category = await _categorydb. GetAllCategoryAsync();
+        var categories = await _categorydb.GetAllCategoryAsync();
+        return Ok(categories);
+    }
+
+    // Get category by ID
+    [HttpGet("details/{id}")]
+    public async Task<ActionResult<Category>> GetCategoryByIdAsync(int id)
+    {
+        var category = await _categorydb.GetCategoryByIdAsync(id);
+        if (category == null)
+        {
+            return NotFound($"Category with ID {id} not found.");
+        }
         return Ok(category);
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Category>> GetCategoryByIdAsync(int id)
-    {
-        var product = await _categorydb.GetCategoryByIdAsync(id);
-        if (product == null)
-        {
-            return NotFound();
-        }
-        return Ok(product);
-    }  
-
-    // API to add a new product
-    [HttpPost]
+    // Add a new category
+    [HttpPost("add")]
     public async Task<ActionResult> AddCategoryAsync([FromBody] Category category)
     {
         if (category == null)
         {
-            return BadRequest("Category data is required");
+            return BadRequest("Category data is required.");
         }
 
         await _categorydb.AddCategoryAsync(category);
         return CreatedAtAction(nameof(GetCategoryByIdAsync), new { id = category.CategoryId }, category);
     }
 
-    // API to update an existing product
-    [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateProduct(int id, [FromBody] Category product)
+    // Update an existing category
+    [HttpPut("update/{id}")]
+    public async Task<ActionResult> UpdateCategoryAsync(int id, [FromBody] Category category)
     {
-        if (product == null || product.CategoryId != id)
+        if (category == null || category.CategoryId != id)
         {
-            return BadRequest("Product data is invalid");
+            return BadRequest("Category data is invalid.");
         }
 
-        var existingProduct = await _categorydb.GetCategoryByIdAsync(id);
-        if (existingProduct == null)
+        var existingCategory = await _categorydb.GetCategoryByIdAsync(id);
+        if (existingCategory == null)
         {
-            return NotFound();
+            return NotFound($"Category with ID {id} not found.");
         }
 
-        await _categorydb.UpdateCategoryAsync(product);
-        return NoContent(); // Indicates success with no content to return
+        await _categorydb.UpdateCategoryAsync(category);
+        return NoContent();
     }
 
-    // API to delete a product by id
-    [HttpDelete("{id}")]
+    // Delete a category by ID
+    [HttpDelete("delete/{id}")]
     public async Task<ActionResult> DeleteCategoryAsync(int id)
-    
     {
         var existingCategory = await _categorydb.GetCategoryByIdAsync(id);
         if (existingCategory == null)
         {
-            return NotFound();
+            return NotFound($"Category with ID {id} not found.");
         }
 
         await _categorydb.DeleteCategoryAsync(id);
-        return NoContent(); // Success without returning any data
+        return NoContent();
     }
 }
